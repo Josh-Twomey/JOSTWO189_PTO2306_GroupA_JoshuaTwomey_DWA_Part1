@@ -10,14 +10,14 @@ form.addEventListener("submit", (event) => {
   
   // Hierachy of errors important 
   // Nested so that if an error occurs before the next, the correct error is displayed
-
+  
   // put this first so that if value is not a number => Critically fails
   if (isNaN(dividend) || isNaN(divider)) {
     document.body.innerHTML ="Something critical went wrong. Please reload the page";
     throw new Error("Invalid input: Values must be numbers.");
-  /*Check for non entries next as a non entry could fail the next if statement too
+  /*Check for non entries next as a non entry could fail the next if statement too (because of type coercion)
    Incorrect error message will be displayed*/  
-  } else if (!dividend || !divider) { 
+  } else if (!dividend || !divider) {
     result.innerText = "Division not performed. Both values are required in inputs. Try again";
   } else if (dividend <= 0 || divider <= 0 ) {
     result.innerText = "Division not performed. Invalid number provided. Try again"; 
@@ -26,3 +26,6 @@ form.addEventListener("submit", (event) => {
     result.innerText = Math.floor(dividend / divider);
   }
 });
+
+
+// Forms return strings
