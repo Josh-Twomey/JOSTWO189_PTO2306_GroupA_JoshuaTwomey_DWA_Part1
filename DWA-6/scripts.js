@@ -2,6 +2,39 @@
 
 import { books, authors, genres, BOOKS_PER_PAGE } from "./data.js";
 
+  const data = {
+    list: {
+      description: document.querySelector("[data-list-description]"),
+      subtitle: document.querySelector("[data-list-subtitle]"),
+      title: document.querySelector("[data-list-title]"),
+      image: document.querySelector("[data-list-image]"),
+      blur: document.querySelector("[data-list-blur]"),
+      active: document.querySelector("[data-list-active]"),
+      items: document.querySelector("[data-list-items]"),
+      button: document.querySelector("[data-list-button]"),
+      message: document.querySelector("[data-list-message]"),
+      close: document.querySelector("[data-list-close]"),
+    },
+    search: {
+      overlay: document.querySelector("[data-search-overlay]"),
+      form: document.querySelector("[data-search-form]"),
+      title: document.querySelector("[data-search-title]"),
+      authors: document.querySelector("[data-search-authors]"),
+      genre: document.querySelector("[data-search-genres]"),
+      cancel: document.querySelector("[data-search-cancel")
+    },
+    settings: {
+      overlay: document.querySelector("[data-settings-overlay]"),
+      form: document.querySelector("[data-settings-form]"),
+      cancel: document.querySelector("[data-settings-cancel]"),
+      theme: document.querySelector("[data-settings-theme]"),
+    },
+    header: {
+      settings: document.querySelector("[data-header-settings]"),
+      search: document.querySelector("[data-header-search]"),
+    },
+  };
+
 let page = 1;
 let matches = books;
 
@@ -27,8 +60,9 @@ for (const { author, id, image, title } of matches.slice(0, BOOKS_PER_PAGE)) {
   starting.appendChild(element);
 }
 
-document.querySelector("[data-list-items]").appendChild(starting);
+data.list.items.appendChild(starting);
 
+// Add Function to do both Option lists
 const genreHtml = document.createDocumentFragment();
 const firstGenreElement = document.createElement("option");
 firstGenreElement.value = "any";
@@ -42,7 +76,7 @@ for (const [id, name] of Object.entries(genres)) {
   genreHtml.appendChild(element);
 }
 
-document.querySelector("[data-search-genres]").appendChild(genreHtml);
+data.search.genre.appendChild(genreHtml);
 
 const authorsHtml = document.createDocumentFragment();
 const firstAuthorElement = document.createElement("option");
@@ -57,28 +91,26 @@ for (const [id, name] of Object.entries(authors)) {
   authorsHtml.appendChild(element);
 }
 
-document.querySelector("[data-search-authors]").appendChild(authorsHtml);
+data.search.authors.appendChild(authorsHtml);
 
-if (
-  window.matchMedia &&
-  window.matchMedia("(prefers-color-scheme: dark)").matches
-) {
-  document.querySelector("[data-settings-theme]").value = "night";
+// Function to use is other apps?
+if (window.matchMedia &&window.matchMedia("(prefers-color-scheme: dark)").matches) {
+  data.settings.theme.value = "night";
   document.documentElement.style.setProperty("--color-dark", "255, 255, 255");
   document.documentElement.style.setProperty("--color-light", "10, 10, 20");
 } else {
-  document.querySelector("[data-settings-theme]").value = "day";
+  data.settings.theme.value = "day";
   document.documentElement.style.setProperty("--color-dark", "10, 10, 20");
   document.documentElement.style.setProperty("--color-light", "255, 255, 255");
 }
 
-document.querySelector("[data-list-button]").innerText = `Show more (${
+data.list.button.innerText = `Show more (${
   books.length - BOOKS_PER_PAGE
 })`;
-document.querySelector("[data-list-button]").disabled =
+data.list.button.disabled =
   matches.length - page * BOOKS_PER_PAGE > 0;
 
-document.querySelector("[data-list-button]").innerHTML = `
+data.list.button.innerHTML = `
     <span>Show more</span>
     <span class="list__remaining"> (${
       matches.length - page * BOOKS_PER_PAGE > 0
@@ -87,34 +119,28 @@ document.querySelector("[data-list-button]").innerHTML = `
     })</span>
 `;
 
-document.querySelector("[data-search-cancel]").addEventListener("click", () => {
-  document.querySelector("[data-search-overlay]").open = false;
+  (data.search.cancel).addEventListener("click", () => {
+  data.search.overlay.open = false;
 });
 
-document
-  .querySelector("[data-settings-cancel]")
-  .addEventListener("click", () => {
-    document.querySelector("[data-settings-overlay]").open = false;
+data.settings.cancel.addEventListener("click", () => {
+    data.settings.overlay.open = false;
   });
 
-document.querySelector("[data-header-search]").addEventListener("click", () => {
-  document.querySelector("[data-search-overlay]").open = true;
-  document.querySelector("[data-search-title]").focus();
+  data.header.search.addEventListener("click", () => {
+  data.search.overlay.open = true;
+  data.search.title.focus();
 });
 
-document
-  .querySelector("[data-header-settings]")
-  .addEventListener("click", () => {
-    document.querySelector("[data-settings-overlay]").open = true;
+data.header.settings.addEventListener("click", () => {
+    data.settings.overlay.open = true;
   });
 
-document.querySelector("[data-list-close]").addEventListener("click", () => {
-  document.querySelector("[data-list-active]").open = false;
+  data.list.close.addEventListener("click", () => {
+  data.list.active.open = false;
 });
 
-document
-  .querySelector("[data-settings-form]")
-  .addEventListener("submit", (event) => {
+data.settings.form.addEventListener("submit", (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
     const { theme } = Object.fromEntries(formData);
@@ -133,12 +159,10 @@ document
       );
     }
 
-    document.querySelector("[data-settings-overlay]").open = false;
+    data.settings.overlay.open = false;
   });
 
-document
-  .querySelector("[data-search-form]")
-  .addEventListener("submit", (event) => {
+data.search.form.addEventListener("submit", (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
     const filters = Object.fromEntries(formData);
@@ -168,16 +192,12 @@ document
     matches = result;
 
     if (result.length < 1) {
-      document
-        .querySelector("[data-list-message]")
-        .classList.add("list__message_show");
+      data.list.message.classList.add("list__message_show");
     } else {
-      document
-        .querySelector("[data-list-message]")
-        .classList.remove("list__message_show");
+      data.list.message.classList.remove("list__message_show");
     }
 
-    document.querySelector("[data-list-items]").innerHTML = "";
+    data.list.items.innerHTML = "";
     const newItems = document.createDocumentFragment();
 
     for (const { author, id, image, title } of result.slice(
@@ -202,12 +222,10 @@ document
 
       newItems.appendChild(element);
     }
-
-    document.querySelector("[data-list-items]").appendChild(newItems);
-    document.querySelector("[data-list-button]").disabled =
-      matches.length - page * BOOKS_PER_PAGE < 1;
-
-    document.querySelector("[data-list-button]").innerHTML = `
+// Show more button intergrate?
+    data.list.items.appendChild(newItems);
+    data.list.button.disabled = matches.length - page * BOOKS_PER_PAGE < 1;
+    data.list.button.innerHTML = `
         <span>Show more</span>
         <span class="list__remaining"> (${
           matches.length - page * BOOKS_PER_PAGE > 0
@@ -217,10 +235,10 @@ document
     `;
 
     window.scrollTo({ top: 0, behavior: "smooth" });
-    document.querySelector("[data-search-overlay]").open = false;
+    data.search.overlay.open = false;
   });
 
-document.querySelector("[data-list-button]").addEventListener("click", () => {
+data.list.button.addEventListener("click", () => {
   const fragment = document.createDocumentFragment();
 
   for (const { author, id, image, title } of matches.slice(
@@ -246,13 +264,11 @@ document.querySelector("[data-list-button]").addEventListener("click", () => {
     fragment.appendChild(element);
   }
 
-  document.querySelector("[data-list-items]").appendChild(fragment);
+  data.list.items.appendChild(fragment);
   page += 1;
 });
 
-document
-  .querySelector("[data-list-items]")
-  .addEventListener("click", (event) => {
+data.list.items.addEventListener("click", (event) => {
     const pathArray = Array.from(event.path || event.composedPath());
     let active = null;
 
@@ -272,14 +288,14 @@ document
     }
 
     if (active) {
-      document.querySelector("[data-list-active]").open = true;
-      document.querySelector("[data-list-blur]").src = active.image;
-      document.querySelector("[data-list-image]").src = active.image;
-      document.querySelector("[data-list-title]").innerText = active.title;
-      document.querySelector("[data-list-subtitle]").innerText = `${
-        authors[active.author]
-      } (${new Date(active.published).getFullYear()})`;
-      document.querySelector("[data-list-description]").innerText =
-        active.description;
+      data.list.active.open = true;
+      data.list.blur.src = active.image;
+      data.list.image.src = active.image;
+      data.list.title.innerText = active.title;
+      data.list.subtitle.innerText = `${authors[active.author]} 
+      (${new Date(active.published).getFullYear()})`;
+      data.list.description.innerText =active.description;
     }
   });
+
+
