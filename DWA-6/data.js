@@ -1,4 +1,4 @@
-
+/**A constant defining the number of books to display per page. */
 export const BOOKS_PER_PAGE = 36;
 
 export const authors = {

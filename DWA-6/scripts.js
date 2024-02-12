@@ -1,10 +1,11 @@
 // Fully working scripts.js file
 
 import { books, authors, genres, BOOKS_PER_PAGE } from "./data.js";
-
+/**The current page index. */
 let page = 1;
+/**An array of book data objects containing `author`, `id`, `image`, and `title` properties. */
 let matches = books;
-
+/**An object containing references to DOM elements */
   const data = {
     list: {
       description: document.querySelector("[data-list-description]"),
@@ -38,7 +39,9 @@ let matches = books;
     },
   };
 
-
+/**
+ * Updates the text and disabled state of the "Show more" button based on the current page index and data.
+ */
 const updateButtonText = () => {
   data.list.button.innerText = `Show more (${
     matches.length - BOOKS_PER_PAGE * page
@@ -54,6 +57,9 @@ const updateButtonText = () => {
 `;
 };
 
+/**
+ * Updates the visual display of book previews based on the current page index and data.
+ */
   const updateDisplay = () => {
       const fragment = document.createDocumentFragment();
 
@@ -82,14 +88,20 @@ const updateButtonText = () => {
 
 updateDisplay()
 
-const filterValues = (value,item,dropdown) => {
+/**
+ * This function adds values to a dropdown list in the search overlay
+ * @param {string} defaultOption - Set the first value you want users to see
+ * @param {array} arr - array that has the values you want to display
+ * @param {*} dropdown - dropdown list you want to add options to
+ */
+const filterValues = (firstValue,arr,dropdown) => {
 const html = document.createDocumentFragment();
-const first = document.createElement("option");
-first.value = "any";
-first.innerText = value;
-html.appendChild(first);
+const defaultOption = document.createElement("option");
+defaultOption.value = "any";
+defaultOption.innerText = firstValue;
+html.appendChild(defaultOption);
 
-for (const [id, name] of Object.entries(item)) {
+for (const [id, name] of Object.entries(arr)) {
   const element = document.createElement("option");
   element.value = id;
   element.innerText = name;
@@ -103,12 +115,13 @@ filterValues('All Genres',genres,data.search.genre)
 filterValues('All Authors',authors,data.search.authors)
 
     const colourSwap = (theme) => {
+    const CSS = document.documentElement.style;
       if (theme === "night") {
-        document.documentElement.style.setProperty("--color-dark","255, 255, 255");
-        document.documentElement.style.setProperty("--color-light","10, 10, 20");
+        CSS.setProperty("--color-dark","255, 255, 255");
+        CSS.setProperty("--color-light", "10, 10, 20");
       } else {
-        document.documentElement.style.setProperty("--color-dark","10, 10, 20");
-        document.documentElement.style.setProperty("--color-light","255, 255, 255");
+        CSS.setProperty("--color-dark", "10, 10, 20");
+        CSS.setProperty("--color-light", "255, 255, 255");
       }
     };
 
