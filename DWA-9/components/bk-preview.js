@@ -73,6 +73,8 @@ template.innerHTML = /* html */ `
 
 
 export class preview extends HTMLElement {
+
+//img = getAttribute('src')
     img = undefined;
     title = undefined;
     author = undefined;

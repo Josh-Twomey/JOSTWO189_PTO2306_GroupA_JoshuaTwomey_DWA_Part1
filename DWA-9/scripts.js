@@ -64,7 +64,12 @@ const updateButtonText = () => {
 /**
  * Updates the visual display of book previews based on the current page index and data.
  */
- const createBookPreviewElement = ({ author, id, image, title }) => {
+
+  /* const element = document.createElement("bk-preview");
+     element.setAttribute("title", title); 
+  */
+  
+const createBookPreviewElement = ({ author, id, image, title }) => {
    const element = new preview(image,title,authors[author],id);
    
    return element;
