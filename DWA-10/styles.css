@@ -1,0 +1,81 @@
+:root {
+    --color-white: #ffffff;
+}
+
+html {
+    height: 100vh;
+}
+
+body {
+    margin: 0;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 100%;
+}
+
+.reset {
+    padding: 10px;
+    width: 14rem; 
+}
+
+.actions::part(base) {
+    height: 7rem;
+    width: 7rem;
+    line-height: 6rem;
+    font-size: 3rem;
+}
+
+.custom__button__color::part(base) {
+    background: var(--sl-color-neutral-0);
+    border: solid 1px red;
+}
+
+.custom__button__color::part(base):hover {
+    background: rgba(255, 99, 71, 0.1);
+}
+
+.custom__button__color::part(base):active {
+    background: rgba(255, 99, 71, 0.2);
+}
+
+.custom__button__color::part(label) {
+    color: var(--color-white)
+}
+
+.custom__button__color::part(label):hover {
+    color: rgba(255, 99, 71, 0.8);
+}
+
+.counter__value {
+    width: 100%;
+    background-color: var(--color-light-blue);
+    color: var(--color-dark-blue);
+    border: none;
+    height: 15rem;
+    text-align: center;
+    font-size: 6rem;
+}
+
+.counter__actions {
+    display: flex;
+    flex-direction: row;
+    justify-content:center;
+}
+
+
+header {
+    color: var(--color-white);
+    font-size: 3rem;
+}
+
+
+footer {
+   color: var(--color-white);
+
+}
+
+a {
+    color: var(--color-white);
+}

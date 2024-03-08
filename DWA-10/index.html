@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tally Count</title>
+    <link rel="stylesheet" href="./styles.css">
+    <script src="./scripts.js" defer ></script>
+    <link
+    rel="stylesheet"
+    media="(prefers-color-scheme:light)"
+    href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.14.0/cdn/themes/light.css"
+    />
+    <link
+    rel="stylesheet"
+    media="(prefers-color-scheme:dark)"
+    href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.14.0/cdn/themes/dark.css"
+    onload="document.documentElement.classList.add('sl-theme-dark');"
+    />
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.14.0/cdn/shoelace-autoloader.js"></script>
+</head>
+<body>
+    <header>Tally Count</header>
+    <main class="counter">
+        <input class="counter__value" data-key="number" readonly value="0">
+        <div class="counter__actions">
+            
+            <sl-button class="custom__button__color actions counter__actions" data-key="add">+</sl-button>
+            <sl-button class="custom__button__color actions counter__actions" data-key="subtract">-</sl-button>
+        </div>
+        <sl-button class="custom__button__color reset" data-key="reset">Reset</sl-button>
+    </main>
+
+    <footer>This has been Created as a Project using <a href="https://tallycount.app/">Tally Count</a> as a guide</footer>
+</body>
+</html>
