@@ -33,3 +33,11 @@ console.log(noCape.length)
 
 const hasS = names.map((name) => name.toLocaleLowerCase().includes("s"))
 console.log(hasS);
+
+
+const nameProvinces = names.reduce((acc, name, index) => {
+    acc[name] = provinces[index];
+    return acc;
+}, {});
+
+console.log(nameProvinces);
