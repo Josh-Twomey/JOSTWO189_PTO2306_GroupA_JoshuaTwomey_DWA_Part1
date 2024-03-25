@@ -22,22 +22,17 @@ names.forEach((item,index) => console.log(`${item} (${provinces[index]})`));
 
 provinces.map((item) => console.log(item.toLocaleUpperCase()))
 
-const nameLengths = names.map((item) => item.length);
-console.log(nameLengths)
+console.log(names.map((item) => item.length))
 
 console.log(provinces.toSorted())
 
 
-const noCape = provinces.filter(item => !item.toLocaleUpperCase().includes('CAPE'))
-console.log(noCape.length)
+console.log(provinces.filter(item => !item.toLocaleUpperCase().includes('CAPE')).length)
 
-const hasS = names.map((name) => name.toLocaleLowerCase().includes("s"))
-console.log(hasS);
+console.log(names.map((name) => name.toLocaleLowerCase().includes("s")))
 
 
-const nameProvinces = names.reduce((acc, name, index) => {
+console.log(names.reduce((acc, name, index) => {
     acc[name] = provinces[index];
     return acc;
-}, {});
-
-console.log(nameProvinces);
+},{}))
