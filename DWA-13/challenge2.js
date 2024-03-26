@@ -61,13 +61,3 @@ console.log(
   }, [])
 );
 
-
-var twoSum = function (nums, target) {
-  nums.forEach((item, index, arr) => {
-    if (arr[index] + arr[index + 1] == target) {
-      return [index, index + 1].sort();
-    }
-  });
-};
-
-
