@@ -29,7 +29,7 @@ console.log(provinces.toSorted())
 
 console.log(provinces.filter(item => !item.toLocaleUpperCase().includes('CAPE')).length)
 
-console.log(names.map((name) => name.toLocaleLowerCase().includes("s")))
+console.log(names.map((name) => name.toUpperCase().split('').some(letter => letter === "S")))
 
 
 console.log(names.reduce((acc, name, index) => {
