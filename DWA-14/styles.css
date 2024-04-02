@@ -1,0 +1,33 @@
+:root {
+    --color-white: #ffffff;
+}
+
+html {
+    height: 100vh;
+}
+
+body {
+    margin: 0;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 100%;
+}
+
+
+
+header {
+    color: var(--color-white);
+    font-size: 3rem;
+}
+
+
+footer {
+   color: var(--color-white);
+
+}
+
+a {
+    color: var(--color-white);
+}
